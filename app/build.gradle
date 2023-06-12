@@ -4,8 +4,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
-//    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
+    //id 'kotlin-android-extensions'
+    //id 'kotlin-kapt'
 }
 
 android {
@@ -20,18 +20,50 @@ android {
         versionName BuildConfig.versionName
         testInstrumentationRunner AndroidX.AndroidJUnitRunner
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
     }
 
     buildTypes {
         release {
+//            signingConfig signingConfigs.releaseConfig
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    if (outputFileName != null
+                            && outputFileName.endsWith('.apk')
+                            && 'release' == variant.buildType.name) {
+                        outputFileName = "${BuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
+                    }
+                }
+            }
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    if (outputFileName != null
+                            && outputFileName.endsWith('.apk')
+                            && 'debug' == variant.buildType.name) {
+                        outputFileName = "${BuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
+                    }
+                }
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
@@ -41,37 +73,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation AndroidX.CoreKtx
-    implementation AndroidX.AppCompat
-    implementation AndroidX.ConstraintLayout
-    testImplementation Android.Junit
-    androidTestImplementation AndroidX.TestExtJunit
-    androidTestImplementation AndroidX.TestEspresso
-    implementation AndroidX.ActivityKtx
-    implementation AndroidX.FragmentKtx
+    implementation AndroidX.MultiDex
 
-    implementation Kotlin.Kotlin
-    implementation Kotlin.CoroutinesCore
-    implementation Kotlin.CoroutinesAndroid
-
-    implementation JetPack.LifecycleRuntimeKtx
-    implementation JetPack.LifecycleViewModel
-    implementation JetPack.LifecycleViewModelKtx
-    implementation JetPack.HiltLifecycleViewModel
-    implementation JetPack.HiltDaggerAndroid
-    kapt JetPack.HiltDaggerCompiler
-    kapt JetPack.Hilt
-
-    implementation GitHub.OkHttp
-    implementation GitHub.OkHttpInterceptorLogging
-    implementation GitHub.Retrofit
-    implementation GitHub.RetrofitConverterGson
-    implementation GitHub.Gson
-    implementation GitHub.MMKV
-    implementation GitHub.AutoSize
-    implementation GitHub.Glide
-    kapt GitHub.GlideCompiler
-    implementation GitHub.ARoute
-    kapt GitHub.ARouteCompiler
-    implementation GitHub.RecyclerViewAdapter
+    if (!BuildConfig.isAppMode) {
+        implementation project(path: ':lib_main')
+    } else {
+        implementation project(path: ':lib_base')
+    }
 }

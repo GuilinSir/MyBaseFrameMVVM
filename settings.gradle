@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MyBaseFrameMVVM"
 include ':app'
+include ':lib_base'
+include ':lib_main'
