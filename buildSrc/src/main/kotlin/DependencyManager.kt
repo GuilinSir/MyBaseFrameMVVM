@@ -1,4 +1,5 @@
 package com.guilin.mybaseframemvvm.build
+
 /**
  * 依赖库管理
  */
@@ -12,6 +13,7 @@ object Version {
     const val ActivityKtx = "1.1.0"
     const val FragmentKtx = "1.2.5"
     const val MultiDex = "2.0.1"
+    const val ViewBinding = "8.0.2"
 
     // Android---------------------------------------------------------------
     const val Junit = "4.13"
@@ -24,9 +26,9 @@ object Version {
     const val LifecycleViewModel = "2.2.0"
     const val LifecycleRuntimeKtx = "2.2.0"
     const val LifecycleViewModelKtx = "2.2.0"
-    const val Hilt = "1.0.0-alpha02"                    // Hilt 依赖注入
-    const val HiltLifecycleViewModel = "1.0.0-alpha02"
-    const val HiltDagger = "2.28-alpha"
+//    const val Hilt = "1.0.0-alpha02"                    // Hilt 依赖注入
+//    const val HiltLifecycleViewModel = "1.0.0-alpha02"
+//    const val HiltDagger = "2.28-alpha"
 
     // GitHub----------------------------------------------------------------
     const val OkHttp = "3.14.9"                         // OkHttp
@@ -53,6 +55,8 @@ object AndroidX {
     const val ActivityKtx = "androidx.activity:activity-ktx:${Version.ActivityKtx}"
     const val FragmentKtx = "androidx.fragment:fragment-ktx:${Version.FragmentKtx}"
     const val MultiDex = "androidx.multidex:multidex:${Version.MultiDex}"
+    const val ViewBinding = "androidx.databinding:viewbinding:${Version.ViewBinding}"
+    const val android = "material"
 }
 
 object Android {
@@ -66,12 +70,12 @@ object JetPack {
         "androidx.lifecycle:lifecycle-runtime-ktx:${Version.LifecycleRuntimeKtx}"
     const val LifecycleViewModelKtx =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.LifecycleViewModelKtx}"
-    const val Hilt = "androidx.hilt:hilt-compiler:${Version.Hilt}"
-    const val HiltLifecycleViewModel =
-        "androidx.hilt:hilt-lifecycle-viewmodel:${Version.HiltLifecycleViewModel}"
-    const val HiltDaggerAndroid = "com.google.dagger:hilt-android:${Version.HiltDagger}"
-    const val HiltDaggerCompiler =
-        "com.google.dagger:hilt-android-compiler:${Version.HiltDagger}"
+//    const val Hilt = "androidx.hilt:hilt-compiler:${Version.Hilt}"
+//    const val HiltLifecycleViewModel =
+//        "androidx.hilt:hilt-lifecycle-viewmodel:${Version.HiltLifecycleViewModel}"
+//    const val HiltDaggerAndroid = "com.google.dagger:hilt-android:${Version.HiltDagger}"
+//    const val HiltDaggerCompiler =
+//        "com.google.dagger:hilt-android-compiler:${Version.HiltDagger}"
 }
 
 object Kotlin {

@@ -9,5 +9,8 @@ import android.app.Application
  * @date :   2023/6/12 11:19 AM
  */
 open class BaseApplication:Application() {
+    override fun onCreate() {
+        super.onCreate()
+    }
 
 }
