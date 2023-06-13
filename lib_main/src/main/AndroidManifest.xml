@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.guilin.main">
+    package="com.guilin.main" >
 
     <application>
         <activity
+            android:name=".v.MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".v.MainActivityMain2Activity"
+            android:exported="false" />
+        <activity
             android:name=".v.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -39,8 +39,8 @@ object Version {
     const val MMKV = "1.2.2"                            // 腾讯 MMKV 替代SP
     const val AutoSize = "1.2.1"                        // 屏幕适配
     const val Glide = "4.11.0"                          // Glide
-    const val ARoute = "1.5.0"                          // 阿里路由
-    const val ARouteCompiler = "1.2.2"                  // 阿里路由 APT
+    const val ARoute = "1.5.2"                          // 阿里路由
+    const val ARouteCompiler = "1.5.2"                  // 阿里路由 APT
     const val RecyclerViewAdapter = "3.0.4"             // RecyclerViewAdapter
     const val StatusBar = "1.5.1"                       // 状态栏
 }

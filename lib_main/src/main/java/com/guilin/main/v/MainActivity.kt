@@ -1,11 +1,17 @@
 package com.guilin.main.v
 
-import android.widget.Toast
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.guilin.base.ktx.toast
+import com.guilin.common.constant.RouteKey
+import com.guilin.common.constant.RouteUrl
 import com.guilin.common.ui.BaseActivity
 import com.guilin.main.vm.MainViewModel
 import com.guilin.main.databinding.MainActivityMainBinding
 
-class MainActivity : BaseActivity<MainActivityMainBinding, MainViewModel>(MainViewModel::class.java) {
+@Route(path = RouteUrl.MainActivity)
+class MainActivity :
+    BaseActivity<MainActivityMainBinding, MainViewModel>(MainViewModel::class.java) {
 
     override fun initViewBinding(): MainActivityMainBinding {
         return MainActivityMainBinding.inflate(layoutInflater)
@@ -14,8 +20,14 @@ class MainActivity : BaseActivity<MainActivityMainBinding, MainViewModel>(MainVi
     override fun initView() {
         mViewModel.msg.observe(this) {
             mBinding.tvText.text = it
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            toast(it)
         }
         mBinding.mBtn.setOnClickListener { mViewModel.getString() }
+        mBinding.mIntentBtn.setOnClickListener {
+            ARouter.getInstance()
+                .build(RouteUrl.MainActivity2)
+                .withString(RouteKey.KEY_NAME, "ARouter")
+                .navigation()
+        }
     }
 }

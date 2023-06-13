@@ -65,7 +65,6 @@ dependencies {
     api GitHub.ARoute
     api GitHub.RecyclerViewAdapter
 
-
     kapt GitHub.GlideCompiler
     kapt GitHub.ARouteCompiler
     api GitHub.StatusBar

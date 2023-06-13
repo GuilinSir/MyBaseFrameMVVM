@@ -1,6 +1,5 @@
 apply from: '../moduleBase.gradle'
-apply plugin: 'org.jetbrains.kotlin.android'
-
 android {
     resourcePrefix "main_"
 }
+

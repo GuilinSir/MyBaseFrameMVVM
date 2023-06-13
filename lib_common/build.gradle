@@ -41,7 +41,6 @@ dependencies {
 
     api project(path: ':lib_base')
 
-
     kapt GitHub.GlideCompiler
     kapt GitHub.ARouteCompiler
 }
