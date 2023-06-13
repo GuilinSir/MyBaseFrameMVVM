@@ -2,6 +2,7 @@ package com.guilin.mybaseframemvvm
 
 import androidx.multidex.MultiDex
 import com.guilin.common.CommonApplication
+import org.greenrobot.eventbus.EventBus
 
 /**
  * @description:
@@ -12,6 +13,10 @@ import com.guilin.common.CommonApplication
 class AppApplication :CommonApplication(){
     override fun initialize() {
         MultiDex.install(this)
+        // 开启EventBusAPT,优化反射效率
+        EventBus.builder()
+            //.addIndex(MainEventIndex())
+            .installDefaultEventBus()
         super.initialize()
     }
 }

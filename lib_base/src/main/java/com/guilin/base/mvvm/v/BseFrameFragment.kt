@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
+import com.guilin.base.utils.EventBusRegister
+import com.guilin.base.utils.EventBusUtils
 
 /**
  * @description:Fragment基类 与项目无关
@@ -37,10 +39,18 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
         super.onViewCreated(view, savedInstanceState)
         // ARouter 依赖注入
         ARouter.getInstance().inject(this)
+        // 注册EventBus
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
+            EventBusUtils.register(this)
         initView()
     }
 
     abstract fun initViewBinding(): VB
     abstract fun initView()
+    override fun onDestroy() {
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
+            EventBusUtils.unRegister(this)
+        super.onDestroy()
+    }
 
 }

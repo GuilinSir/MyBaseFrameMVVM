@@ -7,9 +7,6 @@
             android:name=".v.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".v.MainActivityMain2Activity"
-            android:exported="false" />
-        <activity
             android:name=".v.MainActivity"
             android:exported="true" >
             <intent-filter>

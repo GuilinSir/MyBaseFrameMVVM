@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
+import com.guilin.base.utils.EventBusRegister
+import com.guilin.base.utils.EventBusUtils
 
 /**
  * @description:Activity基类 与项目无关
@@ -13,11 +15,12 @@ import com.alibaba.android.arouter.launcher.ARouter
  * @email:   308139995@qq.com
  * @date :   2023/6/12 11:34 AM
  */
-abstract class BaseFrameActivity<VB : ViewBinding,VM:ViewModel> (private val vmClass: Class<VM>): AppCompatActivity() {
-    val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE){
+abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
+    AppCompatActivity() {
+    val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
         initViewBinding()
     }
-    val mViewModel:VM by lazy (mode = LazyThreadSafetyMode.NONE){
+    val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
         ViewModelProvider(this).get(vmClass)
     }
 
@@ -26,10 +29,19 @@ abstract class BaseFrameActivity<VB : ViewBinding,VM:ViewModel> (private val vmC
         setContentView(mBinding.root)
         // ARouter 依赖注入
         ARouter.getInstance().inject(this)
+
+        // 注册EventBus
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
+            EventBusUtils.register(this)
         initView()
     }
 
     abstract fun initViewBinding(): VB
     abstract fun initView()
+    override fun onDestroy() {
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
+            EventBusUtils.unRegister(this)
+        super.onDestroy()
+    }
 
 }
