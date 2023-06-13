@@ -1,6 +1,7 @@
 package com.guilin.base
 
 import android.app.Application
+import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guilin.base.utils.SpUtils
 import me.jessyan.autosize.AutoSizeConfig
@@ -12,8 +13,14 @@ import me.jessyan.autosize.AutoSizeConfig
  * @date :   2023/6/12 11:19 AM
  */
 open class BaseApplication : Application() {
+    companion object {
+        // 全局Context
+        lateinit var application: Context
+    }
+
     override fun onCreate() {
         super.onCreate()
+        application = applicationContext
         initialize()
     }
 

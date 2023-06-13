@@ -70,6 +70,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation AndroidX.MultiDex
+    debugImplementation GitHub.LeakCanary
 
     if (!BuildConfig.isAppMode) {
         implementation project(path: ':lib_main')

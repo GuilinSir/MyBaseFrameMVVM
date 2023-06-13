@@ -1,8 +1,11 @@
 package com.guilin.common.net
 
 import android.os.Build
+import com.guilin.base.BaseApplication
+import com.guilin.base.BaseApplication.Companion.application
 import com.guilin.common.BuildConfig
 import com.guilin.common.constant.NetUrl
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,6 +33,7 @@ object NetServiceCreator {
             .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)//重连超时
             .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)//读取超时
             .addInterceptor(if (BuildConfig.DEBUG) BODY else NONE)//请求日志拦截器
+            .addInterceptor(ChuckInterceptor(BaseApplication.application))  // 请求日志拦截器(UI)
             .retryOnConnectionFailure(true)//失败重连
             .build()
     }

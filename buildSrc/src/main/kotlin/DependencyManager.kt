@@ -45,6 +45,8 @@ object Version {
     const val StatusBar = "1.5.1"                       // 状态栏
     const val EventBus = "3.2.0"                        // 事件总线
     const val PermissionX = "1.3.0"                     // 权限申请
+    const val LeakCanary = "2.11"                        // 检测内存泄漏
+    const val Chuck = "1.1.0"                           // OkHttp 请求信息拦截器(UI)
 
 }
 
@@ -108,5 +110,7 @@ object GitHub {
     const val EventBus = "org.greenrobot:eventbus:${Version.EventBus}"
     const val EventBusAPT = "org.greenrobot:eventbus-annotation-processor:${Version.EventBus}"
     const val PermissionX = "com.permissionx.guolindev:permissionx:${Version.PermissionX}"
+    const val LeakCanary = "com.squareup.leakcanary:leakcanary-android:${Version.LeakCanary}"
+    const val Chuck = "com.readystatesoftware.chuck:library:${Version.Chuck}"
 
 }
