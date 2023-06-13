@@ -18,11 +18,11 @@ class MainActivity :
     }
 
     override fun initView() {
-        mViewModel.msg.observe(this) {
+        mViewModel.msgTest.observe(this) {
             mBinding.tvText.text = it
             toast(it)
         }
-        mBinding.mBtn.setOnClickListener { mViewModel.getString() }
+        mBinding.mBtn.setOnClickListener { mViewModel.getTestString() }
         mBinding.mIntentBtn.setOnClickListener {
             ARouter.getInstance()
                 .build(RouteUrl.MainActivity2)

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.alibaba.android.arouter.launcher.ARouter
 
 /**
  * @description:Fragment基类 与项目无关
@@ -34,6 +35,8 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // ARouter 依赖注入
+        ARouter.getInstance().inject(this)
         initView()
     }
 
