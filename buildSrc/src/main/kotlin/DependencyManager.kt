@@ -112,5 +112,6 @@ object GitHub {
     const val PermissionX = "com.permissionx.guolindev:permissionx:${Version.PermissionX}"
     const val LeakCanary = "com.squareup.leakcanary:leakcanary-android:${Version.LeakCanary}"
     const val Chuck = "com.readystatesoftware.chuck:library:${Version.Chuck}"
+    const val ChuckNoOp = "com.readystatesoftware.chuck:library-no-op:${Version.Chuck}"
 
 }

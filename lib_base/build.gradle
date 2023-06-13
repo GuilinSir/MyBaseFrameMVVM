@@ -66,12 +66,15 @@ dependencies {
     api GitHub.StatusBar
     api GitHub.EventBus
     api GitHub.PermissionX
-    debugImplementation GitHub.Chuck
+
 
     kapt GitHub.GlideCompiler
     kapt GitHub.ARouteCompiler
     kapt GitHub.EventBusAPT
 
+    debugApi GitHub.LeakCanary
+    debugApi GitHub.Chuck
+    releaseApi GitHub.ChuckNoOp
 
 
 }
