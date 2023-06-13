@@ -10,8 +10,8 @@ import com.guilin.common.CommonApplication
  * @date :   2023/6/12 10:38 AM
  */
 class AppApplication :CommonApplication(){
-    override fun onCreate() {
+    override fun initialize() {
         MultiDex.install(this)
-        super.onCreate()
+        super.initialize()
     }
 }

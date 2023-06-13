@@ -68,4 +68,5 @@ dependencies {
 
     kapt GitHub.GlideCompiler
     kapt GitHub.ARouteCompiler
+    api GitHub.StatusBar
 }
