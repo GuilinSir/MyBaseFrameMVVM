@@ -11,7 +11,9 @@ import com.guilin.common.constant.RouteUrl
 import com.guilin.common.ui.BaseActivity
 import com.guilin.main.vm.MainViewModel
 import com.guilin.main.databinding.MainActivityMainBinding
+import com.permissionx.guolindev.PermissionX
 import org.greenrobot.eventbus.Subscribe
+import java.util.jar.Manifest
 
 @EventBusRegister
 @Route(path = RouteUrl.MainActivity)
@@ -37,6 +39,16 @@ class MainActivity :
         mBinding.mEventBusBtn.setOnClickListener{
             EventBusUtils.postEvent(TestBean("EventBus"))
         }
+
+        PermissionX.init(this)
+            .permissions(android.Manifest.permission.READ_PHONE_STATE)
+            .request { allGranted, grantedList, deniedList ->
+                if(allGranted){
+                    toast("权限全部授予")
+                }else{
+                    toast("您拒绝了权限")
+                }
+            }
 
     }
 

@@ -65,10 +65,12 @@ dependencies {
     api GitHub.RecyclerViewAdapter
     api GitHub.StatusBar
     api GitHub.EventBus
+    api GitHub.PermissionX
 
     kapt GitHub.GlideCompiler
     kapt GitHub.ARouteCompiler
     kapt GitHub.EventBusAPT
+
 
 
 }
