@@ -1,7 +1,7 @@
 # <p align="center"> MyBaseFrameMVVM 🐽</p>
 <p align="center">原作者项目地址:[AndroidBaseFrameMVVM](https://github.com/Quyunshuo/AndroidBaseFrameMVVM)</p>
 
-<p align="center"> AndroidBaseFrameMVVM 是一个 Android 项目 MVVM 架构 开箱即用的框架 </p>
+<p align="center">MyBaseFrameMVVM 是一个 Android 项目 MVVM 架构 开箱即用的框架 </p>
 
 <p align="center"> 该框架基于 Kotlin + Flow + Jetpack + MVVM + 组件化 + Repository 模式实现</p>
 
