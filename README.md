@@ -1,4 +1,5 @@
 # <p align="center"> AndroidBaseFrameMVVM 🐽</p>
+<p align="center">[原项目地址](https://github.com/Quyunshuo/AndroidBaseFrameMVVM)欢迎start！ AndroidBaseFrameMVVM 是一个 Android 项目 MVVM 架构 开箱即用的框架 </p>
 
 <p align="center"> AndroidBaseFrameMVVM 是一个 Android 项目 MVVM 架构 开箱即用的框架 </p>
 
@@ -65,7 +66,3 @@ android {
 * MVVM 采用 Jetpack 组件 + Repository 设计模式 实现,所使用的 Jetpack 并不是很多,像 DataBinding、Hilt(不支持多模块)、Room 等并没有使用,如果需要可以添加。采用架构模式目的就是为了解偶代码,对代码进行分层,各模块各司其职,所以既然使用了架构模式那就要遵守好规范
 * Repository 仓库层负责数据的提供,ViewModel 无需关心数据的来源,Repository 内避免使用 LiveData,框架里使用了 Kotlin 协程的 Flow 进行处理请求或访问数据库,最后将数据发射到 ViewModel 调用者,Flow上游负责提供数据,下游也就是ViewModel获取到数据使用LiveData进行存储,View层订阅LiveData,实现数据驱动视图
 * 三者的依赖都是单向依赖,View -> ViewModel -> Repository
-
-## 结语
-* 本人是一个刚大学毕业的 Android 开发者,技术相对来说比较薄弱,写这个框架主要是为了在以后自己使用、对自己技术做一个总结、对其他想学习的同学提供一个例子、也是想把一些东西开源出去,让这个社区更加的美好。文档中可能有些描述不太专业和生硬,我也很少写这些东西,所以表达起来很生疏。
-* 如果你绝对该项目对你有用,那就请给一个 star🌟吧🥰
