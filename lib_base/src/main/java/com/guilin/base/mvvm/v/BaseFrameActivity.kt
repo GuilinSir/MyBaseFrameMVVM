@@ -34,10 +34,12 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel>(private val v
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.register(this)
         initView()
+        initViewObserve()
     }
 
     abstract fun initViewBinding(): VB
     abstract fun initView()
+    abstract fun initViewObserve()
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)

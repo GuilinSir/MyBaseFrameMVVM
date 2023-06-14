@@ -47,6 +47,7 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
 
     abstract fun initViewBinding(): VB
     abstract fun initView()
+    abstract fun initViewObserve()
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)
