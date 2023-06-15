@@ -11,7 +11,7 @@ android {
         targetSdkVersion ProjectBuildConfig.targetSdkVersion
         versionCode ProjectBuildConfig.versionCode
         versionName ProjectBuildConfig.versionName
-        testInstrumentationRunner AndroidX.AndroidJUnitRunner
+        testInstrumentationRunner DependencyConfig.AndroidX.AndroidJUnitRunner
         consumerProguardFiles "consumer-rules.pro"//设置 发布的 AAR 依赖库 对应的混淆文件 ;
     }
 
@@ -39,45 +39,49 @@ kapt {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    api AndroidX.CoreKtx
-    api AndroidX.AppCompat
-    api AndroidX.ConstraintLayout
-    api AndroidX.ActivityKtx
-    api AndroidX.FragmentKtx
-    api AndroidX.ViewBinding
-    api AndroidX.MultiDex
+    api DependencyConfig.AndroidX.CoreKtx
+    api DependencyConfig.AndroidX.AppCompat
+    api DependencyConfig.AndroidX.ConstraintLayout
+    api DependencyConfig.AndroidX.ActivityKtx
+    api DependencyConfig.AndroidX.FragmentKtx
+    api DependencyConfig.AndroidX.ViewBinding
+    api DependencyConfig.AndroidX.MultiDex
 
 
-    api Kotlin.Kotlin
-    api Kotlin.CoroutinesCore
-    api Kotlin.CoroutinesAndroid
-
-    api JetPack.LifecycleRuntimeKtx
-    api JetPack.LifecycleViewModel
-    api JetPack.LifecycleViewModelKtx
-
-    api GitHub.OkHttp
-    api GitHub.OkHttpInterceptorLogging
-    api GitHub.Retrofit
-    api GitHub.RetrofitConverterGson
-    api GitHub.Gson
-    api GitHub.MMKV
-    api GitHub.AutoSize
-    api GitHub.Glide
-    api GitHub.ARoute
-    api GitHub.RecyclerViewAdapter
-    api GitHub.StatusBar
-    api GitHub.EventBus
-    api GitHub.PermissionX
+    api DependencyConfig.Kotlin.Kotlin
+    api DependencyConfig.Kotlin.CoroutinesCore
+    api DependencyConfig.Kotlin.CoroutinesAndroid
 
 
-    kapt GitHub.GlideCompiler
-    kapt GitHub.ARouteCompiler
-    kapt GitHub.EventBusAPT
+    api DependencyConfig.JetPack.ViewModel
+    api DependencyConfig.JetPack.ViewModelSavedState
+    api DependencyConfig.JetPack.LiveData
+    api DependencyConfig.JetPack.Lifecycle
 
-    debugApi GitHub.LeakCanary
-    debugApi GitHub.Chuck
-    releaseApi GitHub.ChuckNoOp
+
+    api DependencyConfig.GitHub.OkHttp
+    api DependencyConfig.GitHub.OkHttpInterceptorLogging
+    api DependencyConfig.GitHub.Retrofit
+    api DependencyConfig.GitHub.RetrofitConverterGson
+    api DependencyConfig.GitHub.Gson
+    api DependencyConfig.GitHub.MMKV
+    api DependencyConfig.GitHub.AutoSize
+    api DependencyConfig.GitHub.Glide
+    api DependencyConfig.GitHub.ARoute
+    api DependencyConfig.GitHub.RecyclerViewAdapter
+    api DependencyConfig.GitHub.StatusBar
+    api DependencyConfig.GitHub.EventBus
+    api DependencyConfig.GitHub.PermissionX
+
+
+    kapt DependencyConfig.GitHub.GlideCompiler
+    kapt DependencyConfig.GitHub.ARouteCompiler
+    kapt DependencyConfig.GitHub.EventBusAPT
+    kapt DependencyConfig.JetPack.LifecycleCompilerAPT
+
+    debugApi DependencyConfig.GitHub.LeakCanary
+    debugApi DependencyConfig.GitHub.Chuck
+    releaseApi DependencyConfig.GitHub.ChuckNoOp
 
 
 }

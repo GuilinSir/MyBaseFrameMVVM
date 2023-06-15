@@ -18,7 +18,7 @@ android {
         targetSdk ProjectBuildConfig.targetSdkVersion
         versionCode ProjectBuildConfig.versionCode
         versionName ProjectBuildConfig.versionName
-        testInstrumentationRunner AndroidX.AndroidJUnitRunner
+        testInstrumentationRunner DependencyConfig.AndroidX.AndroidJUnitRunner
 
 //        javaCompileOptions {
 //            annotationProcessorOptions {

@@ -14,7 +14,7 @@ android {
         targetSdkVersion ProjectBuildConfig.targetSdkVersion
         versionCode ProjectBuildConfig.versionCode
         versionName ProjectBuildConfig.versionName
-        testInstrumentationRunner AndroidX.AndroidJUnitRunner
+        testInstrumentationRunner DependencyConfig.AndroidX.AndroidJUnitRunner
         consumerProguardFiles "consumer-rules.pro"//设置 发布的 AAR 依赖库 对应的混淆文件
         // 相关自定义配置
         resValue "string", "VERSION_STATUS", ProjectBuildConfig.versionStatus
@@ -48,8 +48,10 @@ dependencies {
 
     api project(path: ':lib_base')
 
-    kapt GitHub.GlideCompiler
-    kapt GitHub.ARouteCompiler
-    kapt GitHub.EventBusAPT
+    kapt DependencyConfig.GitHub.GlideCompiler
+    kapt DependencyConfig.GitHub.ARouteCompiler
+    kapt DependencyConfig.GitHub.EventBusAPT
+    kapt DependencyConfig.JetPack.LifecycleCompilerAPT
+
 
 }

@@ -18,7 +18,7 @@ android {
         targetSdkVersion ProjectBuildConfig.targetSdkVersion
         versionCode ProjectBuildConfig.versionCode
         versionName ProjectBuildConfig.versionName
-        testInstrumentationRunner AndroidX.AndroidJUnitRunner
+        testInstrumentationRunner DependencyConfig.AndroidX.AndroidJUnitRunner
     }
 
     compileOptions {
@@ -73,10 +73,11 @@ dependencies {
 
     api project(path: ':lib_common')
 
-    testImplementation Android.Junit
-    androidTestImplementation AndroidX.TestExtJunit
-    androidTestImplementation AndroidX.TestEspresso
-    kapt GitHub.GlideCompiler
-    kapt GitHub.ARouteCompiler
-    kapt GitHub.EventBusAPT
+    testImplementation DependencyConfig.Android.Junit
+    androidTestImplementation DependencyConfig.AndroidX.TestExtJunit
+    androidTestImplementation DependencyConfig.AndroidX.TestEspresso
+    kapt DependencyConfig.GitHub.GlideCompiler
+    kapt DependencyConfig.GitHub.ARouteCompiler
+    kapt DependencyConfig.GitHub.EventBusAPT
+    kapt DependencyConfig.JetPack.LifecycleCompilerAPT
 }
