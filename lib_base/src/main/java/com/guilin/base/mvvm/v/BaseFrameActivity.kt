@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
+import com.guilin.base.utils.ViewBindingReflex
 import com.guilin.base.utils.EventBusRegister
 import com.guilin.base.utils.EventBusUtils
+import com.guilin.base.utils.ViewModelReflex
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -21,13 +23,15 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
     AppCompatActivity(),FrameView<VB> {
     val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
         //initViewBinding()
-        getViewBindingReflex()
+        //getViewBindingReflex()
+        ViewBindingReflex.reflexViewBinding(javaClass,layoutInflater)
     }
 
 
     val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
         //ViewModelProvider(this).get(vmClass)
-        getViewModelReflex()
+        //getViewModelReflex()
+        ViewModelReflex.reflexViewModel(javaClass,this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,24 +57,24 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
         super.onDestroy()
     }
 
-    /**
-     * 反射初始化ViewBinding
-     */
-    private fun getViewBindingReflex(): VB {
-        val tClass: Class<VB> =
-            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
-        val infater = tClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
-        return infater.invoke(null, layoutInflater) as VB
-    }
-    /**
-     * 反射初始化ViewModel
-     */
-    private fun getViewModelReflex(): VM {
-        //init ViewModel | getActualTypeArguments [0]=是第一个泛型参数 | [1] = 是类的第二个泛型参数
-        val tClass: Class<VM> =
-            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
-        return ViewModelProvider(this).get(tClass)
-    }
+//    /**
+//     * 反射初始化ViewBinding
+//     */
+//    private fun getViewBindingReflex(): VB {
+//        val tClass: Class<VB> =
+//            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
+//        val infater = tClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+//        return infater.invoke(null, layoutInflater) as VB
+//    }
+//    /**
+//     * 反射初始化ViewModel
+//     */
+//    private fun getViewModelReflex(): VM {
+//        //init ViewModel | getActualTypeArguments [0]=是第一个泛型参数 | [1] = 是类的第二个泛型参数
+//        val tClass: Class<VM> =
+//            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+//        return ViewModelProvider(this).get(tClass)
+//    }
 
 
 }
