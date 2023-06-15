@@ -49,27 +49,3 @@ fun Context.centerToast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHOR
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
 }
-
-/**
- * px 转 dp
- */
-fun Context.px2dp(pxValue: Float): Int {
-    val scale = resources.displayMetrics.density
-    return (pxValue / scale + 0.5f).toInt()
-}
-
-/**
- * sp 转 px
- */
-fun Context.sp2px(spValue: Float): Int {
-    val scale = resources.displayMetrics.scaledDensity
-    return (spValue * scale + 0.5f).toInt()
-}
-
-/**
- * px 转 sp
- */
-fun Context.px2sp(pxValue: Float): Int {
-    val scale = resources.displayMetrics.scaledDensity
-    return (pxValue / scale + 0.5f).toInt()
-}

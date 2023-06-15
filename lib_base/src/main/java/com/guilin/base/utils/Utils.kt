@@ -1,8 +1,15 @@
 package com.guilin.base.utils
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
+import com.alibaba.android.arouter.launcher.ARouter
+import com.guilin.base.BaseApplication
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -12,8 +19,12 @@ import kotlinx.coroutines.flow.flowOn
 /**
  * 以顶层函数存在的常用工具方法
  * startPolling() -> 开启一个轮询
+ * sendEvent() -> 发送普通EventBus事件
+ * toastShow() -> Toast
+ * isNetworkAvailable() -> 检查是否连接网络
+ * aRouterJump() -> 阿里路由不带参数跳转
  */
-
+/**************************************************************************************************/
 /**
  * 使用 Flow 做的简单的轮询
  * 请使用单独的协程来进行管理该 Flow
@@ -21,7 +32,6 @@ import kotlinx.coroutines.flow.flowOn
  * @param intervals 轮询间隔时间/毫秒
  * @param block 需要执行的代码块
  */
-@InternalCoroutinesApi
 suspend fun startPolling(intervals: Long, block: () -> Unit) {
     flow {
         while (true) {
@@ -32,4 +42,63 @@ suspend fun startPolling(intervals: Long, block: () -> Unit) {
         .catch { Log.e("flow", "startPolling: $it") }
         .flowOn(Dispatchers.Main)
         .collect { block.invoke() }
+}
+/**************************************************************************************************/
+
+/**
+ * 发送普通EventBus事件
+ */
+fun sendEvent(event: Any) = EventBusUtils.postEvent(event)
+
+/**************************************************************************************************/
+private var mToast: Toast? = null
+
+/**
+ * Toast
+ * Android 9.0之上 已做优化
+ */
+fun toastShow(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        Toast.makeText(BaseApplication.application, text, duration).show()
+    } else {
+        if (mToast != null) {
+            mToast?.setText(text)
+            mToast?.show()
+        } else {
+            mToast = Toast.makeText(BaseApplication.application, text, duration)
+            mToast?.show()
+        }
+    }
+}
+
+/**************************************************************************************************/
+/**
+ * 判断是否连接网络
+ */
+@SuppressLint("MissingPermission")
+fun isNetworkAvailable(): Boolean {
+    val connectivityManager: ConnectivityManager? =
+        BaseApplication.application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (connectivityManager == null) {
+        return false
+    } else {
+        val allNetworkInfo: Array<NetworkInfo>? = connectivityManager.allNetworkInfo
+        if (allNetworkInfo != null && allNetworkInfo.isNotEmpty()) {
+            allNetworkInfo.forEach {
+                if (it.state == NetworkInfo.State.CONNECTED) {
+                    return true
+                }
+            }
+        }
+    }
+    return false
+}
+
+/**************************************************************************************************/
+/**
+ * 阿里路由不带参数跳转
+ * @param routerUrl String 路由地址
+ */
+fun aRouterJump(routerUrl: String) {
+    ARouter.getInstance().build(routerUrl).navigation()
 }

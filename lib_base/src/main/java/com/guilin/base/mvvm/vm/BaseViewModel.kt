@@ -14,6 +14,9 @@ abstract class BaseViewModel<R : BaseRepository> : ViewModel() {
 
     val isLoding = MutableLiveData(false)
 
+    // 请求异常
+    val requestError = MutableLiveData<Throwable?>()
+
     protected val mRepository: R by lazy {
         initRepository()
     }
