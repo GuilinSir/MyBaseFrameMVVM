@@ -58,7 +58,7 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
     private fun getViewBindingReflex(): VB {
         val tClass: Class<VB> =
             (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
-        val infater = tClass.getMethod("inflate", LayoutInflater::class.java)
+        val infater = tClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
         return infater.invoke(null, layoutInflater) as VB
     }
     /**
