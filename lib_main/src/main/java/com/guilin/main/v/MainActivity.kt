@@ -18,11 +18,11 @@ import java.util.jar.Manifest
 @EventBusRegister
 @Route(path = RouteUrl.MainActivity)
 class MainActivity :
-    BaseActivity<MainActivityMainBinding, MainViewModel>(MainViewModel::class.java) {
+    BaseActivity<MainActivityMainBinding, MainViewModel>() {
 
-    override fun initViewBinding(): MainActivityMainBinding {
-        return MainActivityMainBinding.inflate(layoutInflater)
-    }
+//    override fun initViewBinding(): MainActivityMainBinding {
+//        return MainActivityMainBinding.inflate(layoutInflater)
+//    }
 
     override fun initView() {
         mViewModel.msgTest.observe(this) {
@@ -50,6 +50,10 @@ class MainActivity :
                 }
             }
 
+    }
+
+    override fun initViewObserve() {
+        TODO("Not yet implemented")
     }
 
     @Subscribe

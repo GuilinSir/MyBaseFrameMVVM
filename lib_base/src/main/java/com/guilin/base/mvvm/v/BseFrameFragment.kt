@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guilin.base.utils.EventBusRegister
 import com.guilin.base.utils.EventBusUtils
+import java.lang.reflect.ParameterizedType
 
 /**
  * @description:Fragment基类 与项目无关
@@ -21,10 +22,12 @@ import com.guilin.base.utils.EventBusUtils
 abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
     Fragment() {
     private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(vmClass)
+        //ViewModelProvider(this).get(vmClass)
+        getViewModelReflex()
     }
     private val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
-        initViewBinding()
+        //initViewBinding()
+        getViewBindingReflex()
     }
 
     override fun onCreateView(
@@ -45,13 +48,32 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
         initView()
     }
 
-    abstract fun initViewBinding(): VB
+    //abstract fun initViewBinding(): VB
     abstract fun initView()
     abstract fun initViewObserve()
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)
         super.onDestroy()
+    }
+
+    /**
+     * 反射初始化ViewBinding
+     */
+    private fun getViewBindingReflex(): VB {
+        val tClass: Class<VB> =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val infater = tClass.getMethod("inflate", LayoutInflater::class.java)
+        return infater.invoke(null, layoutInflater) as VB
+    }
+    /**
+     * 反射初始化ViewModel
+     */
+    private fun getViewModelReflex(): VM {
+        //init ViewModel | getActualTypeArguments [0]=是第一个泛型参数 | [1] = 是类的第二个泛型参数
+        val tClass: Class<VM> =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+        return ViewModelProvider(this).get(tClass)
     }
 
 }

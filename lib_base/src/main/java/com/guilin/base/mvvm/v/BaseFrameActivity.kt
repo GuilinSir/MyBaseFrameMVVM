@@ -1,6 +1,7 @@
 package com.guilin.base.mvvm.v
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +9,7 @@ import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guilin.base.utils.EventBusRegister
 import com.guilin.base.utils.EventBusUtils
+import java.lang.reflect.ParameterizedType
 
 /**
  * @description:Activity基类 与项目无关
@@ -15,13 +17,17 @@ import com.guilin.base.utils.EventBusUtils
  * @email:   308139995@qq.com
  * @date :   2023/6/12 11:34 AM
  */
-abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
+abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
     AppCompatActivity() {
     val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
-        initViewBinding()
+        //initViewBinding()
+        getViewBindingReflex()
     }
+
+
     val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(vmClass)
+        //ViewModelProvider(this).get(vmClass)
+        getViewModelReflex()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +43,7 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel>(private val v
         initViewObserve()
     }
 
-    abstract fun initViewBinding(): VB
+    //abstract fun initViewBinding(): VB
     abstract fun initView()
     abstract fun initViewObserve()
     override fun onDestroy() {
@@ -45,5 +51,25 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel>(private val v
             EventBusUtils.unRegister(this)
         super.onDestroy()
     }
+
+    /**
+     * 反射初始化ViewBinding
+     */
+    private fun getViewBindingReflex(): VB {
+        val tClass: Class<VB> =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val infater = tClass.getMethod("inflate", LayoutInflater::class.java)
+        return infater.invoke(null, layoutInflater) as VB
+    }
+    /**
+     * 反射初始化ViewModel
+     */
+    private fun getViewModelReflex(): VM {
+        //init ViewModel | getActualTypeArguments [0]=是第一个泛型参数 | [1] = 是类的第二个泛型参数
+        val tClass: Class<VM> =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+        return ViewModelProvider(this).get(tClass)
+    }
+
 
 }

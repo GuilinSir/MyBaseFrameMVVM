@@ -10,6 +10,6 @@ import com.guilin.base.mvvm.v.BaseFrameActivity
  * @email:   308139995@qq.com
  * @date :   2023/6/12 2:20 PM
  */
-abstract class BaseFragment<VB:ViewBinding,VM:ViewModel>(mClass: Class<VM>): BaseFrameActivity<VB,VM>(mClass) {
+abstract class BaseFragment<VB:ViewBinding,VM:ViewModel>: BaseFrameActivity<VB,VM>() {
 
 }

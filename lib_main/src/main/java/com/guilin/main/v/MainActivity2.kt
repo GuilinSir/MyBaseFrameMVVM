@@ -12,15 +12,19 @@ import com.guilin.main.vm.MainViewModel
 
 @Route(path = RouteUrl.MainActivity2)
 class MainActivity2 :
-    BaseActivity<MainActivityMain2Binding, MainViewModel>(MainViewModel::class.java) {
+    BaseActivity<MainActivityMain2Binding, MainViewModel>() {
     @Autowired(name = RouteKey.KEY_NAME)
     lateinit var name: String
 
-    override fun initViewBinding(): MainActivityMain2Binding {
-        return MainActivityMain2Binding.inflate(layoutInflater)
-    }
+//    override fun initViewBinding(): MainActivityMain2Binding {
+//        return MainActivityMain2Binding.inflate(layoutInflater)
+//    }
 
     override fun initView() {
         toast(name)
+    }
+
+    override fun initViewObserve() {
+        TODO("Not yet implemented")
     }
 }
