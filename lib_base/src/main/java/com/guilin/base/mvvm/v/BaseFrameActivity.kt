@@ -18,7 +18,7 @@ import java.lang.reflect.ParameterizedType
  * @date :   2023/6/12 11:34 AM
  */
 abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
-    AppCompatActivity() {
+    AppCompatActivity(),FrameView {
     val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
         //initViewBinding()
         getViewBindingReflex()
@@ -44,8 +44,8 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
     }
 
     //abstract fun initViewBinding(): VB
-    abstract fun initView()
-    abstract fun initViewObserve()
+    //abstract fun initView()
+    //abstract fun initViewObserve()
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)

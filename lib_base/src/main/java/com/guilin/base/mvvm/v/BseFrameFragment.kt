@@ -20,7 +20,7 @@ import java.lang.reflect.ParameterizedType
  * @date :   2023/6/12 2:11 PM
  */
 abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
-    Fragment() {
+    Fragment(),FrameView {
     private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
         //ViewModelProvider(this).get(vmClass)
         getViewModelReflex()
@@ -49,8 +49,8 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
     }
 
     //abstract fun initViewBinding(): VB
-    abstract fun initView()
-    abstract fun initViewObserve()
+    //abstract fun initView()
+    //abstract fun initViewObserve()
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)
