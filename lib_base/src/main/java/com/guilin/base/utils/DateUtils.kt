@@ -114,4 +114,49 @@ object DateUtils {
         )
         return calendar.time.time
     }
+
+    /**
+     * String 转化 Calendar
+     * @param string String
+     * @param format String
+     */
+    fun stringToCalendar(string: String, format: String): Calendar? {
+        val sdf = SimpleDateFormat(format, Locale.CHINESE)
+        var calendar: Calendar
+        try {
+            val date: Date = sdf.parse(string) ?: return null
+            calendar = Calendar.getInstance()
+            calendar.time = date
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            calendar = Calendar.getInstance()
+        }
+        return calendar
+    }
+
+    /**
+     * String 转化Date
+     * @param str String
+     * @param format String
+     * @return Date
+     */
+    fun strToDate(str: String, format: String): Date? {
+        val sdf = SimpleDateFormat(format, Locale.CHINESE)
+        return try {
+            sdf.parse(str)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    /**
+     * 判断两个时间是否是同一天
+     * @param cal1 Calendar
+     * @param cal2 Calendar
+     * @return Boolean
+     */
+    fun isSameDay(cal1: Calendar, cal2: Calendar): Boolean {
+        return cal1[0] == cal2[0] && cal1[1] == cal2[1] && cal1[6] == cal2[6]
+    }
 }

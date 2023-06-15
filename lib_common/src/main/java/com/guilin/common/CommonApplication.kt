@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guilin.base.BaseApplication
 import com.guilin.base.utils.ActivityStackManager
+import com.guilin.base.utils.ProcessUtils
 import com.guilin.base.utils.SpUtils
 
 /**
@@ -30,8 +31,10 @@ open class CommonApplication : BaseApplication(), Application.ActivityLifecycleC
 
     override fun initByFrontDesk(): InitDepend {
         val worker = mutableListOf<() -> String>()
-        worker.add { initMMKV() }
-        worker.add { initARouter() }
+        if(ProcessUtils.isMainProcess(this)) {
+            worker.add { initMMKV() }
+            worker.add { initARouter() }
+        }
         //worker.add { initTencentBugly() }
         return InitDepend(null, worker)
     }
