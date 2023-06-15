@@ -24,11 +24,8 @@ class MainActivity :
 //        return MainActivityMainBinding.inflate(layoutInflater)
 //    }
 
-    override fun initView() {
-        mViewModel.msgTest.observe(this) {
-            mBinding.tvText.text = it
-            toast(it)
-        }
+    override fun MainActivityMainBinding.initView() {
+
         mBinding.mBtn.setOnClickListener { mViewModel.getTestString() }
         mBinding.mIntentBtn.setOnClickListener {
             ARouter.getInstance()
@@ -40,6 +37,22 @@ class MainActivity :
             EventBusUtils.postEvent(TestBean("EventBus"))
         }
 
+    }
+
+
+
+    @Subscribe
+    fun onEvent(event: TestBean) {
+        toast(event.msgTest)
+    }
+
+
+
+    override fun initLiveDataObserve() {
+        mViewModel.msgTest.observe(this) {
+            mBinding.tvText.text = it
+            toast(it)
+        }
         PermissionX.init(this)
             .permissions(android.Manifest.permission.READ_PHONE_STATE)
             .request { allGranted, grantedList, deniedList ->
@@ -49,15 +62,9 @@ class MainActivity :
                     toast("您拒绝了权限")
                 }
             }
-
     }
 
-    override fun initViewObserve() {
+    override fun initRequestData() {
         TODO("Not yet implemented")
-    }
-
-    @Subscribe
-    fun onEvent(event: TestBean) {
-        toast(event.msgTest)
     }
 }

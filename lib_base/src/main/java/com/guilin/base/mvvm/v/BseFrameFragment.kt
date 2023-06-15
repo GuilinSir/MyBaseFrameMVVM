@@ -20,7 +20,7 @@ import java.lang.reflect.ParameterizedType
  * @date :   2023/6/12 2:11 PM
  */
 abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
-    Fragment(),FrameView {
+    Fragment(),FrameView<VB> {
     private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
         //ViewModelProvider(this).get(vmClass)
         getViewModelReflex()
@@ -45,7 +45,9 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
         // 注册EventBus
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.register(this)
-        initView()
+        mBinding.initView()
+        initLiveDataObserve()
+        initRequestData()
     }
 
     //abstract fun initViewBinding(): VB

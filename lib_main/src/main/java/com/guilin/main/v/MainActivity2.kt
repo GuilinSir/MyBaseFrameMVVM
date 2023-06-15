@@ -20,11 +20,15 @@ class MainActivity2 :
 //        return MainActivityMain2Binding.inflate(layoutInflater)
 //    }
 
-    override fun initView() {
-        toast(name)
+    override fun MainActivityMain2Binding.initView() {
+        TODO("Not yet implemented")
     }
 
-    override fun initViewObserve() {
+    override fun initLiveDataObserve() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initRequestData() {
         TODO("Not yet implemented")
     }
 }
