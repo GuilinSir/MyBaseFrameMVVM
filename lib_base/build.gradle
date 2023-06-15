@@ -24,6 +24,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     resourcePrefix "base_"
+
     buildFeatures {
         buildConfig true
     }
