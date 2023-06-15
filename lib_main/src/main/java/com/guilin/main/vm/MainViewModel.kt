@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.guilin.base.mvvm.vm.BaseViewModel
 import com.guilin.main.m.MainRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * @description:
@@ -19,13 +21,12 @@ import kotlinx.coroutines.launch
  * @email:   308139995@qq.com
  * @date :   2023/6/12 3:57 PM
  */
-class MainViewModel : BaseViewModel<MainRepository>() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val mRepository: MainRepository) : BaseViewModel() {
     val msg: MutableLiveData<String> = MutableLiveData<String>()
     val msgTest: MutableLiveData<String> = MutableLiveData<String>()
 
-    override fun initRepository(): MainRepository {
-        return MainRepository()
-    }
+
 
     fun getString() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,8 +36,8 @@ class MainViewModel : BaseViewModel<MainRepository>() {
         }
     }
 
-    fun getTestString(){
-        viewModelScope.launch (Dispatchers.IO){
+    fun getTestString() {
+        viewModelScope.launch(Dispatchers.IO) {
             mRepository.mockRequest()
                 .onStart {
                     // 获取数据之前

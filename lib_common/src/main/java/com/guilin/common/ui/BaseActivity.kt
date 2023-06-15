@@ -10,5 +10,5 @@ import com.guilin.base.mvvm.v.BaseFrameActivity
  * @email:   308139995@qq.com
  * @date :   2023/6/12 2:18 PM
  */
-abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : BaseFrameActivity<VB, VM>() {
+abstract class BaseActivity<VB : ViewBinding> : BaseFrameActivity<VB>() {
 }

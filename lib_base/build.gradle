@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 //apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdk ProjectBuildConfig.compileSdkVersion
@@ -34,6 +35,7 @@ kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
+        correctErrorTypes true
 }
 
 dependencies {
@@ -72,12 +74,17 @@ dependencies {
     api DependencyConfig.GitHub.StatusBar
     api DependencyConfig.GitHub.EventBus
     api DependencyConfig.GitHub.PermissionX
+    api DependencyConfig.JetPack.HiltCore
+
 
 
     kapt DependencyConfig.GitHub.GlideCompiler
     kapt DependencyConfig.GitHub.ARouteCompiler
     kapt DependencyConfig.GitHub.EventBusAPT
     kapt DependencyConfig.JetPack.LifecycleCompilerAPT
+    kapt DependencyConfig.JetPack.HiltApt
+    kapt DependencyConfig.JetPack.HiltAndroidx
+
 
     debugApi DependencyConfig.GitHub.LeakCanary
     debugApi DependencyConfig.GitHub.Chuck

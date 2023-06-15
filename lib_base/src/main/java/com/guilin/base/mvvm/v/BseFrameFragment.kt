@@ -21,7 +21,7 @@ import java.lang.reflect.ParameterizedType
  * @email:   308139995@qq.com
  * @date :   2023/6/12 2:11 PM
  */
-abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vmClass: Class<VM>) :
+abstract class BseFrameFragment<VB : ViewBinding > :
     Fragment(), FrameView<VB> {
 
     private val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
@@ -29,11 +29,11 @@ abstract class BseFrameFragment<VB : ViewBinding, VM : ViewModel>(private val vm
         //getViewBindingReflex()
         ViewBindingReflex.reflexViewBinding(javaClass, layoutInflater)
     }
-    private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
-        //ViewModelProvider(this).get(vmClass)
-        //getViewModelReflex()
-        ViewModelReflex.reflexViewModel(javaClass, this)
-    }
+//    private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
+//        //ViewModelProvider(this).get(vmClass)
+//        //getViewModelReflex()
+//        ViewModelReflex.reflexViewModel(javaClass, this)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

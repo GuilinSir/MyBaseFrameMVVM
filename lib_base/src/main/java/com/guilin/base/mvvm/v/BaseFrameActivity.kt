@@ -19,7 +19,7 @@ import java.lang.reflect.ParameterizedType
  * @email:   308139995@qq.com
  * @date :   2023/6/12 11:34 AM
  */
-abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
+abstract class BaseFrameActivity<VB : ViewBinding> :
     AppCompatActivity(),FrameView<VB> {
     val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
         //initViewBinding()
@@ -28,11 +28,11 @@ abstract class BaseFrameActivity<VB : ViewBinding, VM : ViewModel> :
     }
 
 
-    val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
-        //ViewModelProvider(this).get(vmClass)
-        //getViewModelReflex()
-        ViewModelReflex.reflexViewModel(javaClass,this)
-    }
+//    val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
+//        //ViewModelProvider(this).get(vmClass)
+//        //getViewModelReflex()
+//        ViewModelReflex.reflexViewModel(javaClass,this)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,6 +2,7 @@ package com.guilin.mybaseframemvvm
 
 import androidx.multidex.MultiDex
 import com.guilin.common.CommonApplication
+import dagger.hilt.android.HiltAndroidApp
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -10,6 +11,7 @@ import org.greenrobot.eventbus.EventBus
  * @email:   308139995@qq.com
  * @date :   2023/6/12 10:38 AM
  */
+@HiltAndroidApp
 class AppApplication : CommonApplication() {
     override fun onCreate() {
         super.onCreate()

@@ -76,8 +76,12 @@ dependencies {
     testImplementation DependencyConfig.Android.Junit
     androidTestImplementation DependencyConfig.AndroidX.TestExtJunit
     androidTestImplementation DependencyConfig.AndroidX.TestEspresso
+
     kapt DependencyConfig.GitHub.GlideCompiler
     kapt DependencyConfig.GitHub.ARouteCompiler
     kapt DependencyConfig.GitHub.EventBusAPT
     kapt DependencyConfig.JetPack.LifecycleCompilerAPT
+    kapt DependencyConfig.JetPack.HiltApt
+    kapt DependencyConfig.JetPack.HiltAndroidx
+
 }

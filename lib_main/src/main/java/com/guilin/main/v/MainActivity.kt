@@ -1,5 +1,6 @@
 package com.guilin.main.v
 
+import androidx.activity.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guilin.base.utils.EventBusRegister
@@ -12,17 +13,22 @@ import com.guilin.common.ui.BaseActivity
 import com.guilin.main.vm.MainViewModel
 import com.guilin.main.databinding.MainActivityMainBinding
 import com.permissionx.guolindev.PermissionX
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.Subscribe
 import java.util.jar.Manifest
 
 @EventBusRegister
 @Route(path = RouteUrl.MainActivity)
-class MainActivity :
-    BaseActivity<MainActivityMainBinding, MainViewModel>() {
+@AndroidEntryPoint
+class MainActivity : BaseActivity<MainActivityMainBinding>() {
 
 //    override fun initViewBinding(): MainActivityMainBinding {
 //        return MainActivityMainBinding.inflate(layoutInflater)
 //    }
+    /**
+     * 通过 viewModels() + Hilt 获取 ViewModel 实例
+     */
+    private val mViewModel by viewModels<MainViewModel>()
 
     override fun MainActivityMainBinding.initView() {
 

@@ -29,9 +29,8 @@ object DependencyConfig {
 //        const val LifecycleViewModelKtx = "2.2.0"
         const val Lifecycle = "2.3.1"
 
-//    const val Hilt = "1.0.0-alpha02"                    // Hilt 依赖注入
-//    const val HiltLifecycleViewModel = "1.0.0-alpha02"
-//    const val HiltDagger = "2.28-alpha"
+        const val Hilt = "2.46.1"                    // Hilt 依赖注入
+        const val HiltAndroidx = "1.0.0"
 
         // GitHub----------------------------------------------------------------
         const val OkHttp = "3.14.9"                         // OkHttp
@@ -80,17 +79,17 @@ object DependencyConfig {
 //            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.LifecycleViewModelKtx}"
 
         const val ViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.Lifecycle}"
-        const val ViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.Lifecycle}"
+        const val ViewModelSavedState =
+            "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.Lifecycle}"
         const val LiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.Lifecycle}"
         const val Lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.Lifecycle}"
-        const val LifecycleCompilerAPT = "androidx.lifecycle:lifecycle-compiler:${Version.Lifecycle}"
+        const val LifecycleCompilerAPT =
+            "androidx.lifecycle:lifecycle-compiler:${Version.Lifecycle}"
 
-//    const val Hilt = "androidx.hilt:hilt-compiler:${Version.Hilt}"
-//    const val HiltLifecycleViewModel =
-//        "androidx.hilt:hilt-lifecycle-viewmodel:${Version.HiltLifecycleViewModel}"
-//    const val HiltDaggerAndroid = "com.google.dagger:hilt-android:${Version.HiltDagger}"
-//    const val HiltDaggerCompiler =
-//        "com.google.dagger:hilt-android-compiler:${Version.HiltDagger}"
+        const val HiltCore = "com.google.dagger:hilt-android:${Version.Hilt}"
+        const val HiltApt = "com.google.dagger:hilt-compiler:${Version.Hilt}"
+        const val HiltAndroidx = "androidx.hilt:hilt-compiler:${Version.HiltAndroidx}"
+
     }
 
     object Kotlin {

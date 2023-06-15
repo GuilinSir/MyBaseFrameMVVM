@@ -20,7 +20,7 @@ import kotlin.system.measureTimeMillis
  * @email:   308139995@qq.com
  * @date :   2023/6/12 11:19 AM
  */
-abstract class BaseApplication : MultiDexApplication() {
+open abstract class BaseApplication : MultiDexApplication() {
 
     private val mCoroutineScope by lazy(mode = LazyThreadSafetyMode.NONE) {
         MainScope()

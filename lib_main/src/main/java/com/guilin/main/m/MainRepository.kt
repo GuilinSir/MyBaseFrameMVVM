@@ -3,14 +3,14 @@ package com.guilin.main.m
 import com.guilin.base.mvvm.m.BaseRepository
 import com.guilin.common.net.NetRequest
 import kotlinx.coroutines.flow.Flow
-
+import javax.inject.Inject
 /**
  * @description:
  * @author:  guilin
  * @email:   308139995@qq.com
  * @date :   2023/6/12 3:58 PM
  */
-class MainRepository : BaseRepository() {
+class MainRepository @Inject constructor(): BaseRepository() {
 
     /**
      * 模拟请求或读取数据库
@@ -53,3 +53,4 @@ class MainRepository : BaseRepository() {
 
 
 }
+
