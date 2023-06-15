@@ -19,8 +19,8 @@ object Version {
     const val Junit = "4.13"
 
     // Kotlin----------------------------------------------------------------
-    const val Kotlin = "1.4.0"
-    const val Coroutines = "1.3.7"                      // 协程
+    const val Kotlin = "1.4.31"
+    const val Coroutines = "1.4.3"                      // 协程
 
     // JetPack---------------------------------------------------------------
     const val LifecycleViewModel = "2.2.0"

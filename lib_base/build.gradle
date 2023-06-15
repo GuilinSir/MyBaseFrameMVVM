@@ -5,12 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk BuildConfig.compileSdkVersion
+    compileSdk ProjectBuildConfig.compileSdkVersion
     defaultConfig {
-        minSdkVersion BuildConfig.minSdkVersion
-        targetSdkVersion BuildConfig.targetSdkVersion
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
+        minSdkVersion ProjectBuildConfig.minSdkVersion
+        targetSdkVersion ProjectBuildConfig.targetSdkVersion
+        versionCode ProjectBuildConfig.versionCode
+        versionName ProjectBuildConfig.versionName
         testInstrumentationRunner AndroidX.AndroidJUnitRunner
         consumerProguardFiles "consumer-rules.pro"//设置 发布的 AAR 依赖库 对应的混淆文件 ;
     }
@@ -45,6 +45,8 @@ dependencies {
     api AndroidX.ActivityKtx
     api AndroidX.FragmentKtx
     api AndroidX.ViewBinding
+    api AndroidX.MultiDex
+
 
     api Kotlin.Kotlin
     api Kotlin.CoroutinesCore

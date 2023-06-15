@@ -9,15 +9,15 @@ plugins {
 }
 
 android {
-    namespace BuildConfig.namespace
-    compileSdk BuildConfig.compileSdkVersion
+    namespace ProjectBuildConfig.namespace
+    compileSdk ProjectBuildConfig.compileSdkVersion
 
     defaultConfig {
-        applicationId BuildConfig.applicationId
-        minSdk BuildConfig.minSdkVersion
-        targetSdk BuildConfig.targetSdkVersion
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
+        applicationId ProjectBuildConfig.applicationId
+        minSdk ProjectBuildConfig.minSdkVersion
+        targetSdk ProjectBuildConfig.targetSdkVersion
+        versionCode ProjectBuildConfig.versionCode
+        versionName ProjectBuildConfig.versionName
         testInstrumentationRunner AndroidX.AndroidJUnitRunner
 
 //        javaCompileOptions {
@@ -37,7 +37,7 @@ android {
                     if (outputFileName != null
                             && outputFileName.endsWith('.apk')
                             && 'release' == variant.buildType.name) {
-                        outputFileName = "${BuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
+                        outputFileName = "${ProjectBuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
                     }
                 }
             }
@@ -50,7 +50,7 @@ android {
                     if (outputFileName != null
                             && outputFileName.endsWith('.apk')
                             && 'debug' == variant.buildType.name) {
-                        outputFileName = "${BuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
+                        outputFileName = "${ProjectBuildConfig.applicationId}_${defaultConfig.versionCode}(${defaultConfig.versionName}).apk"
                     }
                 }
             }
@@ -73,9 +73,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation AndroidX.MultiDex
-
-    if (!BuildConfig.isAppMode) {
+    if (!ProjectBuildConfig.isAppMode) {
         implementation project(path: ':lib_main')
     } else {
         implementation project(path: ':lib_common')
