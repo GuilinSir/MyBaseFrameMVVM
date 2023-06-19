@@ -20,12 +20,6 @@ android {
         versionCode ProjectBuildConfig.versionCode
         versionName ProjectBuildConfig.versionName
         testInstrumentationRunner DependencyConfig.AndroidX.AndroidJUnitRunner
-
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = [AROUTER_MODULE_NAME: project.getName()]
-//            }
-//        }
     }
 
     buildTypes {
@@ -79,8 +73,9 @@ dependencies {
     } else {
         implementation project(path: ':lib_common')
     }
+
     implementation DependencyConfig.JetPack.HiltCore
 
     kapt DependencyConfig.JetPack.HiltApt
-    kapt DependencyConfig.JetPack.HiltAndroidx
+    kapt DependencyConfig.GitHub.AutoServiceAnnotations
 }

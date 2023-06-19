@@ -1,8 +1,6 @@
 package com.guilin.common.net
 
-import android.os.Build
-import com.guilin.base.BaseApplication
-import com.guilin.base.BaseApplication.Companion.application
+import com.guilin.base.app.BaseApplication
 import com.guilin.common.BuildConfig
 import com.guilin.common.constant.NetUrl
 import com.readystatesoftware.chuck.ChuckInterceptor

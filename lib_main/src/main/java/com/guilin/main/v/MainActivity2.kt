@@ -10,7 +10,7 @@ import com.guilin.main.vm.MainViewModel
 
 @Route(path = RouteUrl.MainActivity2)
 class MainActivity2 :
-    BaseActivity<MainActivityMain2Binding, MainViewModel>() {
+    BaseActivity<MainActivityMain2Binding>() {
     @Autowired(name = RouteKey.KEY_NAME)
     lateinit var name: String
 
@@ -19,14 +19,11 @@ class MainActivity2 :
 //    }
 
     override fun MainActivityMain2Binding.initView() {
-        TODO("Not yet implemented")
     }
 
     override fun initLiveDataObserve() {
-        TODO("Not yet implemented")
     }
 
     override fun initRequestData() {
-        TODO("Not yet implemented")
     }
 }

@@ -18,6 +18,12 @@ android {
         consumerProguardFiles "consumer-rules.pro"//设置 发布的 AAR 依赖库 对应的混淆文件
         // 相关自定义配置
         resValue "string", "VERSION_STATUS", ProjectBuildConfig.versionStatus
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments += ["AROUTER_MODULE_NAME": project.getName()]
+//                arguments += ["eventBusIndex": "${ProjectBuildConfig.applicationId}.eventbus.index.${project.name.replace('Lib_', '')}EventIndex"]
+//            }
+//        }
     }
 
     compileOptions {
@@ -48,13 +54,13 @@ dependencies {
 
     api project(path: ':lib_base')
 
-
+    api DependencyConfig.JetPack.HiltCore
     kapt DependencyConfig.GitHub.GlideCompiler
     kapt DependencyConfig.GitHub.ARouteCompiler
     kapt DependencyConfig.GitHub.EventBusAPT
     kapt DependencyConfig.JetPack.LifecycleCompilerAPT
     kapt DependencyConfig.JetPack.HiltApt
-    kapt DependencyConfig.JetPack.HiltAndroidx
+    kapt DependencyConfig.GitHub.AutoServiceAnnotations
 
 
 

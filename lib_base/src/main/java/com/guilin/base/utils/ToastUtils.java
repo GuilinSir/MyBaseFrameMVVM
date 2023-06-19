@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
-import com.guilin.base.BaseApplication;
+import com.guilin.base.app.BaseApplication;
 
 import java.lang.reflect.Field;
 

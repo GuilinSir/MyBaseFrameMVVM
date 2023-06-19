@@ -22,9 +22,6 @@ import java.util.jar.Manifest
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainActivityMainBinding>() {
 
-//    override fun initViewBinding(): MainActivityMainBinding {
-//        return MainActivityMainBinding.inflate(layoutInflater)
-//    }
     /**
      * 通过 viewModels() + Hilt 获取 ViewModel 实例
      */
@@ -32,45 +29,40 @@ class MainActivity : BaseActivity<MainActivityMainBinding>() {
 
     override fun MainActivityMainBinding.initView() {
 
-        mBinding.mBtn.setOnClickListener { mViewModel.getTestString() }
+        mBinding.mBtn.setOnClickListener { mViewModel.getString() }
         mBinding.mIntentBtn.setOnClickListener {
             ARouter.getInstance()
                 .build(RouteUrl.MainActivity2)
                 .withString(RouteKey.KEY_NAME, "ARouter")
                 .navigation()
         }
-        mBinding.mEventBusBtn.setOnClickListener{
+        mBinding.mEventBusBtn.setOnClickListener {
             EventBusUtils.postEvent(TestBean("EventBus"))
         }
 
     }
 
-
-
     @Subscribe
     fun onEvent(event: TestBean) {
-        (event.msgTest)
+        toast(event.msgTest)
     }
 
-
-
     override fun initLiveDataObserve() {
-        mViewModel.msgTest.observe(this) {
+        mViewModel.msg.observe(this) {
             mBinding.tvText.text = it
             toast(it)
         }
         PermissionX.init(this)
             .permissions(android.Manifest.permission.READ_PHONE_STATE)
             .request { allGranted, grantedList, deniedList ->
-                if(allGranted){
+                if (allGranted) {
                     toast("权限全部授予")
-                }else{
+                } else {
                     toast("您拒绝了权限")
                 }
             }
     }
 
     override fun initRequestData() {
-        TODO("Not yet implemented")
     }
 }

@@ -2,6 +2,7 @@ package com.guilin.main.m
 
 import com.guilin.base.mvvm.m.BaseRepository
 import com.guilin.common.net.NetRequest
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 /**

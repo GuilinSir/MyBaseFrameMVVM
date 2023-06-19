@@ -4,15 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
-import com.guilin.base.BaseApplication
+import com.guilin.base.app.BaseApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -32,17 +30,17 @@ import kotlinx.coroutines.flow.flowOn
  * @param intervals 轮询间隔时间/毫秒
  * @param block 需要执行的代码块
  */
-suspend fun startPolling(intervals: Long, block: () -> Unit) {
-    flow {
-        while (true) {
-            delay(intervals)
-            emit(0)
-        }
-    }
-        .catch { Log.e("flow", "startPolling: $it") }
-        .flowOn(Dispatchers.Main)
-        .collect { block.invoke() }
-}
+//suspend fun startPolling(intervals: Long, block: () -> Unit) {
+//    flow {
+//        while (true) {
+//            delay(intervals)
+//            emit(0)
+//        }
+//    }
+//        .catch { Log.e("flow", "startPolling: $it") }
+//        .flowOn(Dispatchers.Main)
+//        .collect { block.invoke() }
+//}
 /**************************************************************************************************/
 
 /**
