@@ -29,7 +29,11 @@ class MainActivity : BaseActivity<MainActivityMainBinding>() {
 
     override fun MainActivityMainBinding.initView() {
 
-        mBinding.mBtn.setOnClickListener { mViewModel.getString() }
+        mBinding.mBtn.setOnClickListener {
+            mViewModel.getString()
+            mViewModel.getTestString()
+
+        }
         mBinding.mIntentBtn.setOnClickListener {
             ARouter.getInstance()
                 .build(RouteUrl.MainActivity2)

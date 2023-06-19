@@ -13,6 +13,7 @@ import com.guilin.base.utils.EventBusRegister
 import com.guilin.base.utils.EventBusUtils
 import com.guilin.base.utils.ViewBindingReflex
 import com.guilin.base.utils.ViewModelReflex
+import com.guilin.base.utils.ViewRecreateHelper
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -25,15 +26,12 @@ abstract class BseFrameFragment<VB : ViewBinding > :
     Fragment(), FrameView<VB> {
 
     private val mBinding: VB by lazy(mode = LazyThreadSafetyMode.NONE) {
-        //initViewBinding()
-        //getViewBindingReflex()
         ViewBindingReflex.reflexViewBinding(javaClass, layoutInflater)
     }
-//    private val mViewModel: VM by lazy(mode = LazyThreadSafetyMode.NONE) {
-//        //ViewModelProvider(this).get(vmClass)
-//        //getViewModelReflex()
-//        ViewModelReflex.reflexViewModel(javaClass, this)
-//    }
+    /**
+     * fragment页面重建帮助类
+     */
+    private var mStatusHelper: ViewRecreateHelper? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +43,9 @@ abstract class BseFrameFragment<VB : ViewBinding > :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //处理恢复
+        mStatusHelper?.onRestoreInstanceStatus(savedInstanceState)
+
         // ARouter 依赖注入
         ARouter.getInstance().inject(this)
         // 注册EventBus
@@ -55,32 +56,24 @@ abstract class BseFrameFragment<VB : ViewBinding > :
         initRequestData()
     }
 
-    //abstract fun initViewBinding(): VB
-    //abstract fun initView()
-    //abstract fun initViewObserve()
+    /**
+     * 页面可能重建的时候回执行此方法，进行当前页面状态保存
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (mStatusHelper == null) {
+            //仅当触发重建需要保存状态时创建对象
+            mStatusHelper = ViewRecreateHelper(outState)
+        } else {
+            mStatusHelper?.onSaveInstanceState(outState)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java))
             EventBusUtils.unRegister(this)
         super.onDestroy()
     }
-
-//    /**
-//     * 反射初始化ViewBinding
-//     */
-//    private fun getViewBindingReflex(): VB {
-//        val tClass: Class<VB> =
-//            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
-//        val infater = tClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
-//        return infater.invoke(null, layoutInflater) as VB
-//    }
-//    /**
-//     * 反射初始化ViewModel
-//     */
-//    private fun getViewModelReflex(): VM {
-//        //init ViewModel | getActualTypeArguments [0]=是第一个泛型参数 | [1] = 是类的第二个泛型参数
-//        val tClass: Class<VM> =
-//            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
-//        return ViewModelProvider(this).get(tClass)
-//    }
 
 }
