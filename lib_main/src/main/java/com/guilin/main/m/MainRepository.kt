@@ -1,8 +1,8 @@
 package com.guilin.main.m
 
 import com.guilin.base.mvvm.m.BaseRepository
-import com.guilin.common.net.NetRequest
-import kotlinx.coroutines.delay
+import com.guilin.main.di.DIMainNetServiceModule
+import com.guilin.main.net.MainApiService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 /**
@@ -12,6 +12,8 @@ import javax.inject.Inject
  * @date :   2023/6/12 3:58 PM
  */
 class MainRepository @Inject constructor(): BaseRepository() {
+    @Inject
+    lateinit var mApi:MainApiService
 
     /**
      * 模拟请求或读取数据库
@@ -47,7 +49,7 @@ class MainRepository @Inject constructor(): BaseRepository() {
 //        val realtimeResponse = deferredRealtime.await()
 //        val dailyResponse = deferredDaily.await()
         //这两个协程是并行的 不是串行
-        val testBean = NetRequest.homeService.getTestData("mock")
+        val testBean = mApi.getData("mock")
         emit(testBean.msgTest)
 
     }
